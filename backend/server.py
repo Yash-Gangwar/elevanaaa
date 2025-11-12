@@ -68,6 +68,10 @@ async def lifespan(app: FastAPI):
 
 # Create the main app with the lifespan context manager
 app = FastAPI(title="Elevanaa API", version="2.0.0", lifespan=lifespan)
+
+@app.get("/")
+def root():
+    return {"message": "FastAPI backend is running successfully on Render!"}
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
